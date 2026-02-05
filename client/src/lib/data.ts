@@ -2,9 +2,9 @@
 // This allows for easy updates to content without touching components
 
 export const COLLECTIVE = {
-  name: "ONYX COLLECTIVE",
-  tagline: "UNDERGROUND FREQUENCIES",
-  description: "A convergence of sound, space, and rhythm. We curate deep, hypnotic techno experiences.",
+  name: "INSOMNIA",
+  tagline: "ELECTRONIC MUSIC COLLECTIVE",
+  description: "El arte de mantenerte despierto. House selecto para mentes exigentes.",
   socials: {
     instagram: "https://instagram.com",
     soundcloud: "https://soundcloud.com",
@@ -16,7 +16,7 @@ export const COLLECTIVE = {
 export const ARTISTS = [
   {
     id: 1,
-    name: "KAELEB",
+    name: "CLAR",
     role: "RESIDENT / FOUNDER",
     image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=800&h=1200&fit=crop&q=80", // Male portrait, dark
     bio: "Minimalist structures meeting raw industrial percussion.",
@@ -24,16 +24,16 @@ export const ARTISTS = [
   },
   {
     id: 2,
-    name: "VARGA",
-    role: "RESIDENT",
+    name: "JUANDI",
+    role: "RESIDENT / FOUNDER",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=1200&fit=crop&q=80", // Female portrait, moody
     bio: "Hypnotic grooves that warp time and space.",
     socials: { instagram: "#", soundcloud: "#" }
   },
   {
     id: 3,
-    name: "SØREN",
-    role: "RESIDENT",
+    name: "LADI",
+    role: "RESIDENT / FOUNDER",
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=1200&fit=crop&q=80", // Male portrait, intense
     bio: "Deep, dub-influenced techno for the early hours.",
     socials: { instagram: "#", soundcloud: "#" }
@@ -43,10 +43,10 @@ export const ARTISTS = [
 export const GIGS = [
   {
     id: 1,
-    date: "2024-06-15",
-    venue: "FABRIC",
-    city: "LONDON",
-    country: "UK",
+    date: "2026-02-22",
+    venue: "SUNSET ON SUNDAY",
+    city: "FURIA, BOGOTA",
+    country: "CO",
     ticketLink: "#",
     soldOut: false
   },

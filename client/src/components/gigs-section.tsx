@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { GIGS } from "@/lib/data";
 import { ArrowUpRight } from "lucide-react";
 import { format, parseISO } from "date-fns";
+import { es } from "date-fns/locale"; // Import Spanish locale
 
 export function GigsSection() {
   return (
@@ -13,7 +14,7 @@ export function GigsSection() {
           viewport={{ once: true }}
           className="text-4xl md:text-6xl font-bold mb-16 text-white uppercase tracking-tighter"
         >
-          Tour Dates
+          Próximos Eventos
         </motion.h2>
 
         <div className="flex flex-col border-t border-white/10">

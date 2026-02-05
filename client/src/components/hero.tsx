@@ -16,12 +16,12 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-20 flex flex-col items-center text-center max-w-7xl mx-auto">
+      <div className="relative z-20 flex flex-col items-center text-center max-w-7xl mx-auto w-full">
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-sm md:text-base tracking-[0.5em] mb-4 text-gray-400 uppercase"
+          className="text-xs md:text-base tracking-[0.3em] md:tracking-[0.5em] mb-4 text-gray-400 uppercase"
         >
           {COLLECTIVE.tagline}
         </motion.p>
@@ -30,7 +30,8 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2, ease: "circOut" }}
-          className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white mix-blend-difference"
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-wider md:tracking-widest text-white mix-blend-difference w-full break-words"
+          style={{ fontFamily: "var(--font-brand)" }}
         >
           {COLLECTIVE.name}
         </motion.h1>
@@ -46,7 +47,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="text-gray-400 max-w-md text-sm md:text-lg leading-relaxed font-light"
+          className="text-gray-400 max-w-md text-sm md:text-lg leading-relaxed font-light px-4"
         >
           {COLLECTIVE.description}
         </motion.p>
