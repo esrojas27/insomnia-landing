@@ -47,7 +47,6 @@ export function MusicPlayer() {
 
   // Generate fake waveform bars
   const waveformBars = Array.from({ length: 40 }, (_, i) => {
-    // Random height between 30% and 100%
     return Math.max(30, Math.random() * 100);
   });
 
@@ -63,24 +62,44 @@ export function MusicPlayer() {
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1, type: "spring", stiffness: 100 }}
-        className="pointer-events-auto w-full max-w-md bg-black/60 backdrop-blur-xl border border-white/10 p-3 pr-6 flex items-center gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-full ring-1 ring-white/5 relative overflow-visible"
+        transition={{ delay: 1, type: "spring", stiffness: 100, damping: 20 }}
+        className="pointer-events-auto w-full max-w-md p-3 pr-6 flex items-center gap-4 rounded-full relative overflow-visible transition-all duration-300"
+        style={{
+          // 1. Fondo: Negro translúcido para base oscura
+          backgroundColor: "rgba(20, 20, 20, 0.6)",
+
+          // 2. Desenfoque: Efecto esmerilado potente (iOS style)
+          backdropFilter: "blur(25px) saturate(180%)",
+          WebkitBackdropFilter: "blur(25px) saturate(180%)", // Safari support
+
+          // 3. Borde: Sutil, simulando el canto del cristal
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+
+          // 4. Sombras: Elevación + Volumen interno (Inner Glow)
+          boxShadow: `
+            0 20px 40px rgba(0, 0, 0, 0.4),    /* Sombra de elevación profunda */
+            0 0 0 1px rgba(0, 0, 0, 0.1),      /* Borde oscuro sutil */
+            inset 0 1px 0 rgba(255, 255, 255, 0.1) /* Brillo superior interno (Highlight) */
+          `
+        }}
       >
         {/* Rotating Disc / Album Art */}
         <div className="relative w-14 h-14 flex-shrink-0 z-10">
           <motion.div
             animate={{ rotate: isPlaying ? 360 : 0 }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatType: "loop" }}
-            className="w-full h-full rounded-full overflow-hidden border-2 border-zinc-800 shadow-inner bg-black flex items-center justify-center"
+            className="w-full h-full rounded-full overflow-hidden shadow-lg bg-black flex items-center justify-center"
+            style={{
+              border: "1px solid rgba(255,255,255,0.1)"
+            }}
           >
              <img
               src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=100&h=100&fit=crop&q=80"
               alt="Vinyl"
-              className="w-full h-full object-cover opacity-80"
+              className="w-full h-full object-cover opacity-90"
             />
-            <div className="absolute w-4 h-4 bg-black rounded-full border border-zinc-700" />
+            <div className="absolute w-3 h-3 bg-black rounded-full border border-zinc-800" />
           </motion.div>
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-white/20 rounded-full blur-[1px]" />
         </div>
 
         {/* Track Info & Interactive Waveform */}
@@ -90,17 +109,17 @@ export function MusicPlayer() {
           onMouseLeave={() => setIsHovering(false)}
         >
           {/* Top Label */}
-          <div className="flex items-center gap-2 mb-0.5 absolute top-0 w-full transition-opacity duration-300" style={{ opacity: isHovering ? 0 : 1 }}>
-            <div className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-green-500 animate-pulse' : 'bg-zinc-600'}`} />
-            <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-mono">
+          <div className="flex items-center gap-2 mb-0.5 absolute top-1 w-full transition-opacity duration-300" style={{ opacity: isHovering ? 0 : 1 }}>
+            <div className={`w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.6)] ${isPlaying ? 'bg-green-500 animate-pulse' : 'bg-zinc-600'}`} />
+            <p className="text-[10px] text-white/60 uppercase tracking-[0.2em] font-mono font-medium">
               INSOMNIA SELECTION
             </p>
           </div>
 
-          {/* Title (Fades out on hover to show waveform better, or moves up) */}
-          <div className={`overflow-hidden relative w-full transition-all duration-300 ${isHovering ? '-translate-y-2 opacity-50 scale-90 origin-left' : 'translate-y-2'}`}>
+          {/* Title */}
+          <div className={`overflow-hidden relative w-full transition-all duration-300 ${isHovering ? '-translate-y-2 opacity-50 scale-95 origin-left' : 'translate-y-2'}`}>
              <motion.h4
-               className="text-white font-bold text-sm whitespace-nowrap"
+               className="text-white font-bold text-sm whitespace-nowrap drop-shadow-sm"
                animate={{ x: isPlaying && !isHovering ? ["0%", "-100%"] : "0%" }}
                transition={{
                  repeat: Infinity,
@@ -120,12 +139,12 @@ export function MusicPlayer() {
             className={`absolute bottom-0 left-0 w-full cursor-pointer transition-all duration-300 flex items-end gap-[2px] ${isHovering ? 'h-8 opacity-100' : 'h-1 opacity-60'}`}
             onClick={handleSeek}
           >
-            {/* Background Track Line (Visible when not hovering) */}
+            {/* Background Track Line */}
             <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-white/10 rounded-full transition-opacity ${isHovering ? 'opacity-0' : 'opacity-100'}`}>
-               <div className="h-full bg-white/50 rounded-full" style={{ width: `${progress}%` }} />
+               <div className="h-full bg-white/80 rounded-full shadow-[0_0_10px_rgba(255,255,255,0.3)]" style={{ width: `${progress}%` }} />
             </div>
 
-            {/* Waveform Bars (Visible on Hover) */}
+            {/* Waveform Bars */}
             {waveformBars.map((height, i) => {
               const barProgress = (i / waveformBars.length) * 100;
               const isPlayed = barProgress <= progress;
@@ -133,28 +152,29 @@ export function MusicPlayer() {
               return (
                 <div
                   key={i}
-                  className={`flex-1 rounded-t-sm transition-all duration-200 ${isHovering ? '' : 'h-0'}`}
+                  className={`flex-1 rounded-full transition-all duration-200 ${isHovering ? '' : 'h-0'}`}
                   style={{
                     height: isHovering ? `${height}%` : '0%',
-                    backgroundColor: isPlayed ? '#fff' : 'rgba(255,255,255,0.2)'
+                    backgroundColor: isPlayed ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.2)',
+                    boxShadow: isPlayed ? '0 0 4px rgba(255, 255, 255, 0.4)' : 'none'
                   }}
                 />
               );
             })}
 
-            {/* Scrubber Knob (The "Bolita") */}
+            {/* Scrubber Knob (iOS style) */}
             <div
-              className={`absolute bottom-1/2 translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)] pointer-events-none transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
-              style={{ left: `calc(${progress}% - 6px)` }}
+              className={`absolute bottom-1/2 translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.3)] pointer-events-none transition-all duration-200 ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
+              style={{ left: `calc(${progress}% - 8px)` }}
             />
           </div>
         </div>
 
         {/* Controls */}
-        <div className="flex items-center gap-3 pl-2 border-l border-white/10 z-10">
+        <div className="flex items-center gap-3 pl-4 border-l border-white/10 z-10">
           <button 
             onClick={togglePlay}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black hover:scale-105 transition-transform active:scale-95"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black hover:scale-105 transition-all active:scale-95 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
           >
             {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
           </button>
