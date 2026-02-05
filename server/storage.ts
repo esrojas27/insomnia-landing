@@ -25,4 +25,32 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+export class MemStorage implements IStorage {
+  private subscribers: Map<number, Subscriber>;
+  private currentId: number;
+
+  constructor() {
+    this.subscribers = new Map();
+    this.currentId = 1;
+  }
+
+  async createSubscriber(insertSubscriber: InsertSubscriber): Promise<Subscriber> {
+    const id = this.currentId++;
+    const subscriber: Subscriber = {
+      ...insertSubscriber,
+      id,
+      createdAt: new Date(),
+      active: true,
+    };
+    this.subscribers.set(id, subscriber);
+    return subscriber;
+  }
+
+  async getSubscriberByEmail(email: string): Promise<Subscriber | undefined> {
+    return Array.from(this.subscribers.values()).find(
+      (subscriber) => subscriber.email === email,
+    );
+  }
+}
+
+export const storage = process.env.DATABASE_URL ? new DatabaseStorage() : new MemStorage();
