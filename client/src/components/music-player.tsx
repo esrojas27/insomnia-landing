@@ -8,6 +8,7 @@ export function MusicPlayer() {
   const [isHovering, setIsHovering] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Ejemplo de track
   const trackUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
@@ -33,16 +34,59 @@ export function MusicPlayer() {
     }
   };
 
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    // Prevent default to stop scrolling while seeking on mobile
+    // e.preventDefault();
+
     if (progressBarRef.current && audioRef.current) {
       const rect = progressBarRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
+      let clientX;
+
+      if ('touches' in e) {
+        clientX = e.touches[0].clientX;
+      } else {
+        clientX = (e as React.MouseEvent).clientX;
+      }
+
+      const x = clientX - rect.left;
       const width = rect.width;
       const percentage = Math.min(Math.max(0, x / width), 1);
 
       audioRef.current.currentTime = percentage * audioRef.current.duration;
       setProgress(percentage * 100);
+
+      // Reset auto-hide timer on interaction
+      activateHover();
     }
+  };
+
+  // Logic to handle auto-hide on mobile/touch
+  const activateHover = () => {
+    setIsHovering(true);
+
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+
+    // Auto-hide after 2.5 seconds of inactivity
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsHovering(false);
+    }, 2500);
+  };
+
+  const handleMouseEnter = () => {
+    // On desktop, we just keep it open while hovering
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    // On desktop, close immediately when leaving
+    setIsHovering(false);
+  };
+
+  const handleTouchStart = () => {
+    activateHover();
   };
 
   // Generate fake waveform bars
@@ -65,23 +109,21 @@ export function MusicPlayer() {
         transition={{ delay: 1, type: "spring", stiffness: 100, damping: 20 }}
         className="pointer-events-auto w-full max-w-md p-3 pr-6 flex items-center gap-4 rounded-full relative overflow-visible transition-all duration-300"
         style={{
-          // 1. Fondo: Negro translúcido para base oscura
           backgroundColor: "rgba(20, 20, 20, 0.6)",
-
-          // 2. Desenfoque: Efecto esmerilado potente (iOS style)
           backdropFilter: "blur(25px) saturate(180%)",
-          WebkitBackdropFilter: "blur(25px) saturate(180%)", // Safari support
-
-          // 3. Borde: Sutil, simulando el canto del cristal
+          WebkitBackdropFilter: "blur(25px) saturate(180%)",
           border: "1px solid rgba(255, 255, 255, 0.08)",
-
-          // 4. Sombras: Elevación + Volumen interno (Inner Glow)
           boxShadow: `
-            0 20px 40px rgba(0, 0, 0, 0.4),    /* Sombra de elevación profunda */
-            0 0 0 1px rgba(0, 0, 0, 0.1),      /* Borde oscuro sutil */
-            inset 0 1px 0 rgba(255, 255, 255, 0.1) /* Brillo superior interno (Highlight) */
+            0 20px 40px rgba(0, 0, 0, 0.4),
+            0 0 0 1px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1)
           `
         }}
+        // Desktop Hover Events
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        // Mobile Touch Events
+        onTouchStart={handleTouchStart}
       >
         {/* Rotating Disc / Album Art */}
         <div className="relative w-14 h-14 flex-shrink-0 z-10">
@@ -105,8 +147,6 @@ export function MusicPlayer() {
         {/* Track Info & Interactive Waveform */}
         <div
           className="flex-grow min-w-0 flex flex-col justify-center relative z-10 group h-14"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
         >
           {/* Top Label */}
           <div className="flex items-center gap-2 mb-0.5 absolute top-1 w-full transition-opacity duration-300" style={{ opacity: isHovering ? 0 : 1 }}>
@@ -138,6 +178,14 @@ export function MusicPlayer() {
             ref={progressBarRef}
             className={`absolute bottom-0 left-0 w-full cursor-pointer transition-all duration-300 flex items-end gap-[2px] ${isHovering ? 'h-8 opacity-100' : 'h-1 opacity-60'}`}
             onClick={handleSeek}
+            onTouchStart={(e) => {
+                // Allow seeking on touch
+                handleSeek(e);
+            }}
+            onTouchMove={(e) => {
+                // Allow dragging on touch
+                handleSeek(e);
+            }}
           >
             {/* Background Track Line */}
             <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-white/10 rounded-full transition-opacity ${isHovering ? 'opacity-0' : 'opacity-100'}`}>
