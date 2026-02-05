@@ -33,7 +33,8 @@ export function GigsSection() {
                 transition={{ duration: 0.3, delay: i * 0.05 }}
                 className="group flex flex-col md:flex-row items-start md:items-center py-6 md:py-8 border-b border-white/10 hover:bg-white/5 transition-colors px-2 md:px-4 overflow-hidden"
               >
-                <div className="flex flex-col md:w-1/4 mb-2 md:mb-0">
+                {/* Date */}
+                <div className="flex flex-col md:w-1/5 mb-4 md:mb-0 flex-shrink-0">
                   <span className="text-2xl md:text-3xl font-bold font-mono text-white group-hover:text-stroke transition-all">
                     {format(parseISO(gig.date), "dd.MM")}
                   </span>
@@ -42,7 +43,8 @@ export function GigsSection() {
                   </span>
                 </div>
 
-                <div className="flex flex-col md:w-1/3 mb-4 md:mb-0">
+                {/* Venue Info */}
+                <div className="flex flex-col md:w-1/4 mb-4 md:mb-0 flex-shrink-0">
                   <span className="text-xl md:text-2xl font-bold uppercase text-white tracking-wide">
                     {gig.venue}
                   </span>
@@ -51,7 +53,21 @@ export function GigsSection() {
                   </span>
                 </div>
 
-                <div className="md:ml-auto w-full md:w-auto mt-4 md:mt-0">
+                {/* Event Image (New) */}
+                <div className="w-full md:w-1/3 mb-4 md:mb-0 md:px-6">
+                  <div className="relative h-32 md:h-24 w-full overflow-hidden bg-zinc-900 grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <img
+                      src={gig.image}
+                      alt={gig.venue}
+                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                    />
+                    {/* Overlay for better text contrast if needed, or just style */}
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                  </div>
+                </div>
+
+                {/* Ticket Button */}
+                <div className="md:ml-auto w-full md:w-auto mt-2 md:mt-0 flex-shrink-0">
                   {gig.soldOut ? (
                     <span className="block w-full md:w-auto text-center px-6 py-3 border border-white/10 text-gray-500 text-sm uppercase font-bold cursor-not-allowed">
                       Sold Out

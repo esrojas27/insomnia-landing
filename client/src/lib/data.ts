@@ -48,7 +48,9 @@ export const GIGS = [
     city: "FURIA, BOGOTA",
     country: "CO",
     ticketLink: "#",
-    soldOut: false
+    soldOut: false,
+    // Corregido a .jpeg
+    image: "/events/sunset.jpeg"
   },
   {
     id: 2,
@@ -57,7 +59,8 @@ export const GIGS = [
     city: "TBILISI",
     country: "GEO",
     ticketLink: "#",
-    soldOut: false
+    soldOut: false,
+    image: "https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=800&h=400&fit=crop&q=80"
   },
   {
     id: 3,
@@ -66,7 +69,8 @@ export const GIGS = [
     city: "BERLIN",
     country: "DE",
     ticketLink: "#",
-    soldOut: true
+    soldOut: true,
+    image: "https://images.unsplash.com/photo-1545128485-c400e7702796?w=800&h=400&fit=crop&q=80"
   },
   {
     id: 4,
@@ -75,7 +79,8 @@ export const GIGS = [
     city: "TALLINN",
     country: "EE",
     ticketLink: "#",
-    soldOut: false
+    soldOut: false,
+    image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=400&fit=crop&q=80"
   },
   {
     id: 5,
@@ -84,6 +89,7 @@ export const GIGS = [
     city: "AMSTERDAM",
     country: "NL",
     ticketLink: "#",
-    soldOut: false
+    soldOut: false,
+    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=400&fit=crop&q=80"
   }
 ];
