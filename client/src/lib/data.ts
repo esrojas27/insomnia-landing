@@ -40,6 +40,22 @@ export const ARTISTS = [
   }
 ];
 
+// Helper para manejar las rutas de imágenes en GitHub Pages
+// Si estamos en producción (GitHub Pages), agregamos el prefijo del repo
+const getAssetPath = (path: string) => {
+  // En Vite, import.meta.env.BASE_URL contiene el valor de 'base' del config (/insomnia-landing/)
+  const baseUrl = import.meta.env.BASE_URL;
+
+  // Si el path ya tiene http, lo devolvemos tal cual
+  if (path.startsWith('http')) return path;
+
+  // Quitamos la barra inicial si la tiene para evitar dobles barras
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+
+  // Si baseUrl es '/', devolvemos /path, si no, /repo/path
+  return `${baseUrl}${cleanPath}`;
+};
+
 export const GIGS = [
   {
     id: 1,
@@ -49,8 +65,8 @@ export const GIGS = [
     country: "CO",
     ticketLink: "#",
     soldOut: false,
-    // Corregido a .jpeg
-    image: "/events/sunset.jpeg"
+    // Usamos la función helper para asegurar la ruta correcta
+    image: getAssetPath("events/sunset.jpeg")
   },
   {
     id: 2,
