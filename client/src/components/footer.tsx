@@ -1,5 +1,5 @@
 import { COLLECTIVE } from "@/lib/data";
-import { Instagram, Music, Disc } from "lucide-react"; // Music as Soundcloud fallback, Disc as RA
+import { Instagram, Music, Disc } from "lucide-react"; // Music as Soundcloud fallback, Disc as Spotify placeholder if needed
 
 export function Footer() {
   return (
@@ -16,14 +16,32 @@ export function Footer() {
         </div>
 
         <div className="flex gap-8">
-          <a href={COLLECTIVE.socials.instagram} className="text-gray-400 hover:text-white transition-colors">
+          <a
+            href={COLLECTIVE.socials.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            aria-label="Instagram"
+          >
             <Instagram className="w-6 h-6" />
           </a>
-          <a href={COLLECTIVE.socials.soundcloud} className="text-gray-400 hover:text-white transition-colors">
-            <Music className="w-6 h-6" />
-          </a>
-          <a href={COLLECTIVE.socials.ra} className="text-gray-400 hover:text-white transition-colors">
+          <a
+            href={COLLECTIVE.socials.spotify}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            aria-label="Spotify"
+          >
             <Disc className="w-6 h-6" />
+          </a>
+          <a
+            href={COLLECTIVE.socials.soundcloud}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            aria-label="SoundCloud"
+          >
+            <Music className="w-6 h-6" />
           </a>
         </div>
 

@@ -6,7 +6,7 @@ export const COLLECTIVE = {
   tagline: "FEEL THE HOUSE MUSIC",
   description: "El arte de mantenerte despierto. House selecto para mentes exigentes.",
   socials: {
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/insomnia__col?igsh=MW53YWZ0cHZwd2VzeQ==",
     soundcloud: "https://soundcloud.com",
     spotify: "https://spotify.com",
     ra: "https://residentadvisor.net"
