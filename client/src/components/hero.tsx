@@ -36,11 +36,12 @@ export function Hero() {
           {COLLECTIVE.name}
         </motion.h1>
 
-        <motion.div 
+        {/* Vertical Line - Now visible on mobile too but shorter */}
+        <motion.div
           initial={{ height: 0 }}
           animate={{ height: 100 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="w-px bg-white/30 my-8 hidden md:block"
+          className="w-px bg-white/30 my-6 md:my-8 h-12 md:h-24"
         />
 
         <motion.p 
