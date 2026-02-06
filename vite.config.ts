@@ -4,7 +4,8 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
-  base: "/insomnia-landing/",
+  // Al usar dominio personalizado, volvemos a la raíz
+  base: "/",
   plugins: [
     react(),
     runtimeErrorOverlay(),
