@@ -3,7 +3,7 @@
 
 export const COLLECTIVE = {
   name: "INSOMNIA",
-  tagline: "ELECTRONIC MUSIC COLLECTIVE",
+  tagline: "FEEL THE HOUSE MUSIC",
   description: "El arte de mantenerte despierto. House selecto para mentes exigentes.",
   socials: {
     instagram: "https://instagram.com",
@@ -66,7 +66,7 @@ export const GIGS = [
     ticketLink: "#",
     soldOut: false,
     // Usamos la función helper para asegurar la ruta correcta
-    image: getAssetPath("events/sunset.jpeg")
+    image: getAssetPath("events/sunsetOn.jpeg")
   },
   {
     id: 2,

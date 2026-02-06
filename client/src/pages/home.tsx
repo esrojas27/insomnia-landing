@@ -3,6 +3,7 @@ import { GigsSection } from "@/components/gigs-section";
 import { ArtistsGrid } from "@/components/artists-grid";
 import { Newsletter } from "@/components/newsletter";
 import { MusicPlayer } from "@/components/music-player";
+import { FloatingMenu } from "@/components/floating-menu";
 import { GrainOverlay } from "@/components/grain-overlay";
 import { Footer } from "@/components/footer";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <Footer />
       </main>
 
+      <FloatingMenu />
       <MusicPlayer />
     </div>
   );

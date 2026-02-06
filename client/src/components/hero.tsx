@@ -21,7 +21,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-xs md:text-base tracking-[0.3em] md:tracking-[0.5em] mb-4 text-gray-400 uppercase"
+          className="text-xs md:text-base tracking-[0.3em] md:tracking-[0.5em] mb-4 text-gray-400 uppercase font-sans"
         >
           {COLLECTIVE.tagline}
         </motion.p>
@@ -47,7 +47,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="text-gray-400 max-w-md text-sm md:text-lg leading-relaxed font-light px-4"
+          className="text-gray-400 max-w-md text-[10px] md:text-sm leading-relaxed font-light px-4 font-sans uppercase tracking-[0.2em]"
         >
           {COLLECTIVE.description}
         </motion.p>
