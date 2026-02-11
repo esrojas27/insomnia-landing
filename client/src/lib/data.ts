@@ -51,7 +51,7 @@ export const ARTISTS = [
     id: 3,
     name: "LADI",
     role: "RESIDENT / FOUNDER",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=1200&fit=crop&q=80", // Male portrait, intense
+    image: getAssetPath("artists/ladi.jpeg"),
     bio: "Deep, dub-influenced techno for the early hours.",
     socials: { instagram: "#", soundcloud: "#" }
   },
