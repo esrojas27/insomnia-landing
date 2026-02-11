@@ -59,8 +59,8 @@ export const ARTISTS = [
     id: 4,
     name: "TEBI",
     role: "FOUNDER / OPERATIONS",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=1200&fit=crop&q=80", // Placeholder portrait
-    bio: "Building the foundation. Brand, growth, and digital architecture.",
+    image: getAssetPath("artists/tebi.png"),
+    bio: "Sentando las bases. Marca, crecimiento y arquitectura digital.",
     socials: { instagram: "#", soundcloud: "#" }
   }
 ];
