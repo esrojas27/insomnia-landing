@@ -36,7 +36,7 @@ export const ARTISTS = [
     role: "RESIDENT / FOUNDER",
     // Actualizado a la imagen local
     image: getAssetPath("artists/clar.jpg"),
-    bio: "Minimalist structures meeting raw industrial percussion.",
+    bio: "House y tech house con bajos potentes y raíces latinas, creados para transmitir la esencia de los ritmos que me han acompañado toda la vida.",
     socials: { instagram: "#", soundcloud: "#" }
   },
   {
@@ -72,7 +72,8 @@ export const GIGS = [
     venue: "SUNSET ON SUNDAY",
     city: "FURIA, BOGOTA",
     country: "CO",
-    ticketLink: "#",
+    // Link de WhatsApp actualizado
+    ticketLink: "https://wa.me/573008841195?text=Hola,%20estoy%20interesado%20en%20la%20tardeada%20del%20domingo%2022%20de%20febrero%20en%20Furia.%20Quisiera%20m%C3%A1s%20informaci%C3%B3n.",
     soldOut: false,
     // Usamos la función helper para asegurar la ruta correcta
     image: getAssetPath("events/sunsetOn.jpeg")
