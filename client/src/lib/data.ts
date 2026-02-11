@@ -43,7 +43,7 @@ export const ARTISTS = [
     id: 2,
     name: "JUANDI",
     role: "RESIDENT / FOUNDER",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=1200&fit=crop&q=80", // Female portrait, moody
+    image: getAssetPath("artists/juandi.jpeg"),
     bio: "Hypnotic grooves that warp time and space.",
     socials: { instagram: "#", soundcloud: "#" }
   },

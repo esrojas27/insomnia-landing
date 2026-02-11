@@ -14,8 +14,9 @@ export default function Home() {
       
       <main className="relative z-10">
         <Hero />
-        <ArtistsGrid />
+        {/* Intercambiado el orden: GigsSection primero, luego ArtistsGrid */}
         <GigsSection />
+        <ArtistsGrid />
         <Newsletter />
         <Footer />
       </main>
