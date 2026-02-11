@@ -36,14 +36,14 @@ export const ARTISTS = [
     role: "RESIDENT / FOUNDER",
     // Actualizado a la imagen local
     image: getAssetPath("artists/clar.jpg"),
-    bio: "Minimalist structures meeting raw industrial percussion.",
+    bio: "House y tech house con bajos potentes y raíces latinas, creados para transmitir la esencia de los ritmos que me han acompañado toda la vida.",
     socials: { instagram: "#", soundcloud: "#" }
   },
   {
     id: 2,
     name: "JUANDI",
     role: "RESIDENT / FOUNDER",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=1200&fit=crop&q=80", // Female portrait, moody
+    image: getAssetPath("artists/juandi.jpeg"),
     bio: "Hypnotic grooves that warp time and space.",
     socials: { instagram: "#", soundcloud: "#" }
   },
@@ -51,7 +51,7 @@ export const ARTISTS = [
     id: 3,
     name: "LADI",
     role: "RESIDENT / FOUNDER",
-    image: getAssetPath("artists/ladi.jpeg"), // Actualizado a la imagen local
+    image: getAssetPath("artists/ladi.jpeg"),
     bio: "Deep, dub-influenced techno for the early hours.",
     socials: { instagram: "#", soundcloud: "#" }
   },
@@ -59,8 +59,8 @@ export const ARTISTS = [
     id: 4,
     name: "TEBI",
     role: "FOUNDER / OPERATIONS",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=1200&fit=crop&q=80", // Placeholder portrait
-    bio: "Building the foundation. Brand, growth, and digital architecture.",
+    image: getAssetPath("artists/tebi.png"),
+    bio: "Sentando las bases. Marca, crecimiento y arquitectura digital.",
     socials: { instagram: "#", soundcloud: "#" }
   }
 ];
