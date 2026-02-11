@@ -10,8 +10,16 @@ export function MusicPlayer() {
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Ejemplo de track
-  const trackUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+  // Helper para manejar las rutas de assets en GitHub Pages
+  const getAssetPath = (path: string) => {
+    const baseUrl = import.meta.env.BASE_URL;
+    if (path.startsWith('http')) return path;
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    return `${baseUrl}${cleanPath}`;
+  };
+
+  // Ruta al archivo de audio local
+  const trackUrl = getAssetPath("music/mi-set.wav");
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -169,7 +177,7 @@ export function MusicPlayer() {
                  repeatDelay: 1
                }}
              >
-               LATE NIGHT TRANSMISSION 004 — TECHNO BUNKER
+               LORENZO DE BLANCK - SPERANZA (ORIGINAL MIX)
              </motion.h4>
           </div>
 

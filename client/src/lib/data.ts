@@ -1,6 +1,22 @@
 // Central configuration file for the collective
 // This allows for easy updates to content without touching components
 
+// Helper para manejar las rutas de imágenes en GitHub Pages
+// Si estamos en producción (GitHub Pages), agregamos el prefijo del repo
+const getAssetPath = (path: string) => {
+  // En Vite, import.meta.env.BASE_URL contiene el valor de 'base' del config (/insomnia-landing/)
+  const baseUrl = import.meta.env.BASE_URL;
+
+  // Si el path ya tiene http, lo devolvemos tal cual
+  if (path.startsWith('http')) return path;
+
+  // Quitamos la barra inicial si la tiene para evitar dobles barras
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+
+  // Si baseUrl es '/', devolvemos /path, si no, /repo/path
+  return `${baseUrl}${cleanPath}`;
+};
+
 export const COLLECTIVE = {
   name: "INSOMNIA",
   tagline: "FEEL THE HOUSE MUSIC",
@@ -18,7 +34,8 @@ export const ARTISTS = [
     id: 1,
     name: "CLAR",
     role: "RESIDENT / FOUNDER",
-    image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=800&h=1200&fit=crop&q=80", // Male portrait, dark
+    // Actualizado a la imagen local
+    image: getAssetPath("artists/clar.jpg"),
     bio: "Minimalist structures meeting raw industrial percussion.",
     socials: { instagram: "#", soundcloud: "#" }
   },
@@ -48,22 +65,6 @@ export const ARTISTS = [
   }
 ];
 
-// Helper para manejar las rutas de imágenes en GitHub Pages
-// Si estamos en producción (GitHub Pages), agregamos el prefijo del repo
-const getAssetPath = (path: string) => {
-  // En Vite, import.meta.env.BASE_URL contiene el valor de 'base' del config (/insomnia-landing/)
-  const baseUrl = import.meta.env.BASE_URL;
-
-  // Si el path ya tiene http, lo devolvemos tal cual
-  if (path.startsWith('http')) return path;
-
-  // Quitamos la barra inicial si la tiene para evitar dobles barras
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-
-  // Si baseUrl es '/', devolvemos /path, si no, /repo/path
-  return `${baseUrl}${cleanPath}`;
-};
-
 export const GIGS = [
   {
     id: 1,
@@ -83,8 +84,8 @@ export const GIGS = [
     city: "TBILISI",
     country: "GEO",
     ticketLink: "#",
-    soldOut: false,
-    image: "https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=800&h=400&fit=crop&q=80"
+    soldOut: true,
+    image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800&h=400&fit=crop&q=80"
   },
   {
     id: 3,
@@ -103,7 +104,7 @@ export const GIGS = [
     city: "TALLINN",
     country: "EE",
     ticketLink: "#",
-    soldOut: false,
+    soldOut: true,
     image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=400&fit=crop&q=80"
   },
   {
@@ -113,7 +114,7 @@ export const GIGS = [
     city: "AMSTERDAM",
     country: "NL",
     ticketLink: "#",
-    soldOut: false,
+    soldOut: true,
     image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=400&fit=crop&q=80"
   }
 ];

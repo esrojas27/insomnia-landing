@@ -55,14 +55,15 @@ export function GigsSection() {
 
                 {/* Event Image (New) */}
                 <div className="w-full md:w-1/3 mb-4 md:mb-0 md:px-6">
-                  <div className="relative h-32 md:h-24 w-full overflow-hidden bg-zinc-900 grayscale group-hover:grayscale-0 transition-all duration-500">
+                  {/* Eliminamos 'grayscale' y 'opacity-60' para que siempre se vea a color y nítida */}
+                  <div className="relative h-32 md:h-24 w-full overflow-hidden bg-zinc-900 transition-all duration-500">
                     <img
                       src={gig.image}
                       alt={gig.venue}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                     />
-                    {/* Overlay for better text contrast if needed, or just style */}
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                    {/* Overlay opcional, lo quitamos o lo hacemos muy sutil si quieres brillo máximo */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-transparent transition-colors" />
                   </div>
                 </div>
 
