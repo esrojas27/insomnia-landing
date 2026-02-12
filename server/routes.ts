@@ -19,6 +19,12 @@ export async function registerRoutes(
       }
 
       const subscriber = await storage.createSubscriber(input);
+
+      // Google Sheets integration would go here
+      // Since we don't have the credentials or the library installed, we'll just log it for now
+      // To implement this fully, we would need 'google-spreadsheet' package and credentials
+      console.log(`New subscriber: ${subscriber.email}`);
+
       res.status(201).json(subscriber);
     } catch (err) {
       if (err instanceof z.ZodError) {

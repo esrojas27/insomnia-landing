@@ -4,12 +4,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertSubscriberSchema } from "@shared/schema";
 import { type InsertSubscriber } from "@shared/schema";
-import { Loader2, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { Loader2, ArrowRight, Check } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export function Newsletter() {
   const { mutate, isPending } = useCreateSubscriber();
-  const [success, setSuccess] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const form = useForm<InsertSubscriber>({
     resolver: zodResolver(insertSubscriberSchema),
@@ -21,7 +27,7 @@ export function Newsletter() {
   const onSubmit = (data: InsertSubscriber) => {
     mutate(data, {
       onSuccess: () => {
-        setSuccess(true);
+        setShowSuccessModal(true);
         form.reset();
       },
     });
@@ -39,48 +45,54 @@ export function Newsletter() {
           Acceso exclusivo a ubicaciones secretas, preventa de entradas y unreleased tracks.
         </p>
 
-        {success ? (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="p-8 border border-white/20 bg-white/5"
-          >
-            <p className="text-xl font-mono text-white">BIENVENIDO A INSOMNIA</p>
-          </motion.div>
-        ) : (
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow">
-              <input
-                {...form.register("email")}
-                placeholder="CORREO ELECTRÓNICO"
-                type="email"
-                disabled={isPending}
-                className="w-full bg-transparent border-b border-white/30 py-4 px-2 text-white placeholder:text-gray-600 focus:outline-none focus:border-white transition-all font-mono rounded-none"
-              />
-              {form.formState.errors.email && (
-                <p className="absolute -bottom-6 left-0 text-xs text-red-500 font-mono">
-                  {form.formState.errors.email.message}
-                </p>
-              )}
-            </div>
-            
-            <button
-              type="button" // Change to button to prevent default submit if needed, but onClick works too
-              onClick={form.handleSubmit(onSubmit)}
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col md:flex-row gap-4">
+          <div className="relative flex-grow">
+            <input
+              {...form.register("email")}
+              placeholder="CORREO ELECTRÓNICO"
+              type="email"
               disabled={isPending}
-              className="mt-4 md:mt-0 px-8 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
-            >
-              {isPending ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <>
-                  Suscribirse <ArrowRight className="ml-2 w-4 h-4" />
-                </>
-              )}
-            </button>
-          </form>
-        )}
+              className="w-full bg-transparent border-b border-white/30 py-4 px-2 text-white placeholder:text-gray-600 focus:outline-none focus:border-white transition-all font-mono rounded-none"
+            />
+            {form.formState.errors.email && (
+              <p className="absolute -bottom-6 left-0 text-xs text-red-500 font-mono">
+                {form.formState.errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={form.handleSubmit(onSubmit)}
+            disabled={isPending}
+            className="mt-4 md:mt-0 px-8 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[160px]"
+          >
+            {isPending ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <>
+                Suscribirse <ArrowRight className="ml-2 w-4 h-4" />
+              </>
+            )}
+          </button>
+        </form>
       </div>
+
+      <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
+        <DialogContent className="bg-black border border-white/20 text-white sm:max-w-md">
+          <DialogHeader className="items-center text-center space-y-4">
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-2">
+              <Check className="w-6 h-6 text-white" />
+            </div>
+            <DialogTitle className="text-2xl font-bold uppercase tracking-tighter font-display">
+              Bienvenido a Insomnia
+            </DialogTitle>
+            <DialogDescription className="text-gray-400 text-base font-mono">
+              Te has suscrito satisfactoriamente. Pronto recibirás más información sobre nuestros eventos exclusivos y lanzamientos.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
