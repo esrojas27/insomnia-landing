@@ -20,10 +20,20 @@ export async function registerRoutes(
 
       const subscriber = await storage.createSubscriber(input);
 
-      // Google Sheets integration would go here
-      // Since we don't have the credentials or the library installed, we'll just log it for now
-      // To implement this fully, we would need 'google-spreadsheet' package and credentials
-      console.log(`New subscriber: ${subscriber.email}`);
+      // Send to Make.com Webhook
+      const webhookUrl = "https://hook.us2.make.com/ydw46r5ihm96uuwxrggnkup9itrbl0ya";
+
+      // Fire and forget - we don't await this to keep the response fast
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: subscriber.email,
+          createdAt: subscriber.createdAt,
+        }),
+      }).catch(err => console.error("Failed to send to Make webhook:", err));
 
       res.status(201).json(subscriber);
     } catch (err) {
