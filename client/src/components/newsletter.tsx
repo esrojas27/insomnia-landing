@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useCreateSubscriber } from "@/hooks/use-subscribers";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertSubscriberSchema } from "@shared/schema";
@@ -14,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 
 export function Newsletter() {
-  const { mutate, isPending } = useCreateSubscriber();
+  const [isPending, setIsPending] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const form = useForm<InsertSubscriber>({
@@ -24,13 +23,31 @@ export function Newsletter() {
     },
   });
 
-  const onSubmit = (data: InsertSubscriber) => {
-    mutate(data, {
-      onSuccess: () => {
-        setShowSuccessModal(true);
-        form.reset();
-      },
-    });
+  const onSubmit = async (data: InsertSubscriber) => {
+    setIsPending(true);
+    try {
+      // Direct call to Make.com webhook since we are on a static host (GitHub Pages)
+      // and cannot run a backend server.
+      await fetch("https://hook.us2.make.com/ydw46r5ihm96uuwxrggnkup9itrbl0ya", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          createdAt: new Date().toISOString(),
+        }),
+      });
+
+      // We assume success if the fetch doesn't throw (Make usually returns 200 OK)
+      setShowSuccessModal(true);
+      form.reset();
+    } catch (error) {
+      console.error("Failed to subscribe:", error);
+      // Optional: Show error toast here
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
