@@ -11,8 +11,21 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
-export function Newsletter() {
+interface NewsletterProps {
+  title?: string;
+  description?: string;
+  className?: string;
+  hideBackground?: boolean;
+}
+
+export function Newsletter({
+  title = "ÚNETE A INSOMNIA",
+  description = "Acceso exclusivo a ubicaciones secretas, preventa de entradas y unreleased tracks.",
+  className,
+  hideBackground = false
+}: NewsletterProps) {
   const [isPending, setIsPending] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -51,15 +64,21 @@ export function Newsletter() {
   };
 
   return (
-    <section className="py-32 px-4 border-t border-white/10 bg-black relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-zinc-900/20 to-black pointer-events-none" />
+    <section className={cn(
+      "py-32 px-4 relative overflow-hidden",
+      !hideBackground && "border-t border-white/10 bg-black",
+      className
+    )}>
+      {!hideBackground && (
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-zinc-900/20 to-black pointer-events-none" />
+      )}
       
       <div className="max-w-2xl mx-auto text-center relative z-10">
-        <h3 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4 text-white">
-          ÚNETE A INSOMNIA
+        <h3 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4 text-white font-display">
+          {title}
         </h3>
-        <p className="text-gray-400 mb-10 max-w-md mx-auto leading-relaxed">
-          Acceso exclusivo a ubicaciones secretas, preventa de entradas y unreleased tracks.
+        <p className="text-gray-400 mb-10 max-w-md mx-auto leading-relaxed font-sans">
+          {description}
         </p>
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col md:flex-row gap-4">

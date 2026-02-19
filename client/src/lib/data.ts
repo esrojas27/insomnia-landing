@@ -24,7 +24,7 @@ export const COLLECTIVE = {
   socials: {
     instagram: "https://www.instagram.com/insomnia__col?igsh=MW53YWZ0cHZwd2VzeQ==",
     soundcloud: "https://soundcloud.com",
-    spotify: "https://spotify.com",
+    spotify: "https://open.spotify.com/playlist/3Gjw9FDvhNvCa8pZYTgwvH?si=YIyvOrOHThailPRrKNgNow&pi=yw0bSPEJRxSjw",
     ra: "https://residentadvisor.net"
   }
 };
@@ -78,46 +78,49 @@ export const GIGS = [
     // Usamos la función helper para asegurar la ruta correcta
     image: getAssetPath("events/sunsetOn.jpeg")
   },
-  /*
+];
+
+export const CURATED_TRACKS = [
+  {
+    id: 1,
+    title: "Speranza - Lorenzo De Blanck",
+    artist: "Week 2",
+    image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=1000&auto=format&fit=crop",
+    spotifyUrl: "https://open.spotify.com/playlist/3Gjw9FDvhNvCa8pZYTgwvH?si=YIyvOrOHThailPRrKNgNow&pi=yw0bSPEJRxSjw",
+    duration: "0:00", // Se actualizará dinámicamente
+    audioFile: getAssetPath("music/track02.wav")
+  },
   {
     id: 2,
-    date: "2024-06-22",
-    venue: "BASSIANI",
-    city: "TBILISI",
-    country: "GEO",
-    ticketLink: "#",
-    soldOut: true,
-    image: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800&h=400&fit=crop&q=80"
+    title: "Asi Asi (David San Remix)",
+    artist: "Week 3 - Jean Pierre, Mausa, David San",
+    image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=1000&auto=format&fit=crop",
+    spotifyUrl: "https://open.spotify.com/playlist/3Gjw9FDvhNvCa8pZYTgwvH?si=YIyvOrOHThailPRrKNgNow&pi=yw0bSPEJRxSjw",
+    duration: "0:00", // Se actualizará dinámicamente
+    audioFile: getAssetPath("music/track03.mp4")
+  },
+];
+
+export const CURATED_VIDEOS = [
+  {
+    id: 1,
+    title: "ILARIO ALICANTE at MUSIC ON FESTIVAL 2023 - AMSTERDAM",
+    artist: "Week 1",
+    youtubeId: "BjPnc6afhso",
+    isBlocked: true,
+  },
+  {
+    id: 2,
+    title: "Franky Rizardo | Live at FLOW PERÚ | 2025",
+    artist: "Week 2",
+    youtubeId: "7wciCSVOJ-U",
+    isBlocked: true,
   },
   {
     id: 3,
-    date: "2024-07-05",
-    venue: "TRESOR",
-    city: "BERLIN",
-    country: "DE",
-    ticketLink: "#",
-    soldOut: true,
-    image: "https://images.unsplash.com/photo-1545128485-c400e7702796?w=800&h=400&fit=crop&q=80"
+    title: "The Martinez Brothers | Ultra Miami 2019",
+    artist: "Week 3",
+    youtubeId: "g5rIV36WRVk",
+    isBlocked: true,
   },
-  {
-    id: 4,
-    date: "2024-07-12",
-    venue: "EXIST",
-    city: "TALLINN",
-    country: "EE",
-    ticketLink: "#",
-    soldOut: true,
-    image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=400&fit=crop&q=80"
-  },
-  {
-    id: 5,
-    date: "2024-08-01",
-    venue: "AWAKENINGS",
-    city: "AMSTERDAM",
-    country: "NL",
-    ticketLink: "#",
-    soldOut: true,
-    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=400&fit=crop&q=80"
-  }
-  */
 ];

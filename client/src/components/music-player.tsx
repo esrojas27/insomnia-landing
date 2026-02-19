@@ -19,7 +19,7 @@ export function MusicPlayer() {
   };
 
   // Ruta al archivo de audio local
-  const trackUrl = getAssetPath("music/mi-set.wav");
+  const trackUrl = getAssetPath("music/track03.mp4");
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -177,7 +177,7 @@ export function MusicPlayer() {
                  repeatDelay: 1
                }}
              >
-               LORENZO DE BLANCK - SPERANZA (ORIGINAL MIX)
+               Jean Pierre, David San, Mausa - Asi Asi (David San Remix)
              </motion.h4>
           </div>
 

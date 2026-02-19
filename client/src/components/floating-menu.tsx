@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
-import { Menu, Shirt } from "lucide-react";
+import { Menu, Shirt, Music, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "wouter";
 
 export function FloatingMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location] = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -75,16 +77,38 @@ export function FloatingMenu() {
             }}
           >
             <div className="p-1">
-              <a
-                href="#"
-                className="flex items-center gap-3 px-4 py-3 text-sm text-white hover:bg-white/10 rounded-xl transition-colors group"
-                onClick={(e) => e.preventDefault()} // Prevent default for now as it's a placeholder
-              >
-                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                  <Shirt className="w-4 h-4 text-white/80" />
-                </div>
-                <span className="font-mono tracking-wider text-xs uppercase">Insomnia Merch</span>
-              </a>
+              {location !== "/" && (
+                <Link href="/">
+                  <a className="flex items-center gap-3 px-4 py-3 text-sm text-white hover:bg-white/10 rounded-xl transition-colors group">
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Home className="w-4 h-4 text-white/80" />
+                    </div>
+                    <span className="font-mono tracking-wider text-xs uppercase">Inicio</span>
+                  </a>
+                </Link>
+              )}
+
+              {location !== "/music" && (
+                <Link href="/music">
+                  <a className="flex items-center gap-3 px-4 py-3 text-sm text-white hover:bg-white/10 rounded-xl transition-colors group">
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Music className="w-4 h-4 text-white/80" />
+                    </div>
+                    <span className="font-mono tracking-wider text-xs uppercase">Music</span>
+                  </a>
+                </Link>
+              )}
+
+              {location !== "/merch" && (
+                <Link href="/merch">
+                  <a className="flex items-center gap-3 px-4 py-3 text-sm text-white hover:bg-white/10 rounded-xl transition-colors group">
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Shirt className="w-4 h-4 text-white/80" />
+                    </div>
+                    <span className="font-mono tracking-wider text-xs uppercase">Insomnia Merch</span>
+                  </a>
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
